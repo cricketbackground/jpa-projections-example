@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 1000 #Log queries running more than 1sec
+        format_sql: true
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    username: springboot
+    password: springboot
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/offices?schema=office
