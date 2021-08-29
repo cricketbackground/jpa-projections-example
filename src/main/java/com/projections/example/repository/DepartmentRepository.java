@@ -14,4 +14,7 @@ public interface DepartmentRepository extends JpaRepository<Department, String> 
     @Query(" select department from Department department JOIN FETCH department.employees where department.departmentId = :departmentId")
     List<DepartmentProjection> findDepartmentByDepartmentId(String departmentId);
 
+    @Query(" select department from Department department JOIN FETCH department.employees where department.departmentId = :departmentId")
+    List<Department> findByIdFetch(String departmentId);
+
 }

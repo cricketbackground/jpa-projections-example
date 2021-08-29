@@ -1,5 +1,6 @@
 package com.projections.example.service;
 
+import com.projections.example.entity.Department;
 import com.projections.example.model.DepartmentProjection;
 import com.projections.example.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,11 @@ public class HelloService {
 
     public List<DepartmentProjection> fetchAsync(String departmentId) {
         return supplyAsync(() -> departmentRepository.findDepartmentByDepartmentId(departmentId))
+                .thenApplyAsync(departments -> departments).join();
+    }
+
+    public List<Department> fetchAsyncFull(String departmentId) {
+        return supplyAsync(() -> departmentRepository.findByIdFetch(departmentId))
                 .thenApplyAsync(departments -> departments).join();
     }
 }

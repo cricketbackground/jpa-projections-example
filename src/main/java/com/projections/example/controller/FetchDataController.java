@@ -1,5 +1,6 @@
 package com.projections.example.controller;
 
+import com.projections.example.entity.Department;
 import com.projections.example.model.DepartmentProjection;
 import com.projections.example.model.HelloResponse;
 import com.projections.example.service.HelloService;
@@ -28,9 +29,14 @@ public class FetchDataController {
     }
 
     @GetMapping(path = "fetchasync/departments/{departmentId}")
-    public ResponseEntity<List<DepartmentProjection>> fetchAsync(@PathVariable String departmentId) {
+    public ResponseEntity<List<DepartmentProjection>> fetchAsyncFull(@PathVariable String departmentId) {
         log.info("Fetch service called");
         return ResponseEntity.ok(helloService.fetchAsync(departmentId));
     }
 
+    @GetMapping(path = "fetchasyncfull/departments/{departmentId}")
+    public ResponseEntity<List<Department>> fetchAsync(@PathVariable String departmentId) {
+        log.info("Fetch service called");
+        return ResponseEntity.ok(helloService.fetchAsyncFull(departmentId));
+    }
 }
