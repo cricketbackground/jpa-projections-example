@@ -2,6 +2,7 @@ package com.projections.example.controller;
 
 import com.projections.example.entity.Department;
 import com.projections.example.entity.Employee;
+import com.projections.example.entity.Wallet;
 import com.projections.example.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,11 +25,15 @@ public class CreateTestDataController {
     @PostMapping(path = "insertdata")
     public ResponseEntity<String> create() {
         Department department = Department.builder().departmentId(getUuid()).name("D-" + random()).createdBy("john.doe").build();
-        IntStream.range(1, 80).forEach(index -> {
-            department.addEmployee(Employee.builder().employeeId(getUuid()).name("E-" + random() + "-" + 1).createdBy("john.doe").build());
+        IntStream.range(1, 81).forEach(index -> {
+            Employee employee = Employee.builder().employeeId(getUuid()).name("E-" + random() + "-" + 1).createdBy("john.doe").build();
+            IntStream.range(1, 19).forEach(walletId -> {
+                Wallet wallet = Wallet.builder().walletId(getUuid()).name("W-" + random()).createdBy("john.doe").build();
+                employee.addWallet(wallet);
+            });
+            department.addEmployee(employee);
         });
         departmentRepository.save(department);
-
         return ResponseEntity.ok("hello");
     }
 

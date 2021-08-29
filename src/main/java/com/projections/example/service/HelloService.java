@@ -17,12 +17,12 @@ public class HelloService {
 
     private final DepartmentRepository departmentRepository;
 
-    public List<DepartmentProjection> fetch() {
-        return departmentRepository.findDepartmentByDepartmentId("ff8080817b8ece9b017b8eceb15e0000");
+    public List<DepartmentProjection> fetch(String departmentId) {
+        return departmentRepository.findDepartmentByDepartmentId(departmentId);
     }
 
-    public List<DepartmentProjection> fetchAsync() {
-        return supplyAsync(() -> departmentRepository.findDepartmentByDepartmentId("ff8080817b8ece9b017b8eceb15e0000"))
+    public List<DepartmentProjection> fetchAsync(String departmentId) {
+        return supplyAsync(() -> departmentRepository.findDepartmentByDepartmentId(departmentId))
                 .thenApplyAsync(departments -> departments).join();
     }
 }
